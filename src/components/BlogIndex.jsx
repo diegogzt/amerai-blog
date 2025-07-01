@@ -11,21 +11,17 @@ export default function BlogIndex() {
 
   const loadPosts = async () => {
     try {
-      const response = await fetch("/api/articles");
+      // Usar la nueva API que combina artículos estáticos y dinámicos
+      const response = await fetch("/api/articles-combined");
       if (response.ok) {
         const data = await response.json();
-        // Ordenar por fecha de publicación (más reciente primero)
-        data.sort(
-          (a, b) =>
-            new Date(b.publishedAt).getTime() -
-            new Date(a.publishedAt).getTime()
-        );
         setPosts(data);
       } else {
         setError("Error cargando los artículos");
       }
     } catch (err) {
       setError("Error de conexión");
+      console.error("Error loading posts:", err);
     } finally {
       setLoading(false);
     }
@@ -157,7 +153,7 @@ export default function BlogIndex() {
                 </p>
 
                 <a
-                  href={`/blog/${post.slug}`}
+                  href={post.isStatic ? `/blog/${post.slug}` : `/blog/${post.slug}`}
                   className="inline-flex items-center text-green-600 hover:text-green-700 font-medium transition-colors"
                 >
                   Leer más →
