@@ -111,43 +111,6 @@ export default function BlogIndex({ initialPosts = [] }) {
 
   return (
     <div>
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-gray-900 via-gray-800 to-green-900 text-white py-20">
-        <div className="container mx-auto px-6 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
-            Blog de IA
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 text-gray-300 max-w-3xl mx-auto">
-            Descubre las últimas tendencias, tutoriales y análisis del mundo de
-            la Inteligencia Artificial
-          </p>
-          <div className="flex flex-wrap justify-center gap-4 mb-8">
-            <span className="bg-green-600/20 text-green-300 px-4 py-2 rounded-full">
-              Noticias actualizadas
-            </span>
-            <span className="bg-blue-600/20 text-blue-300 px-4 py-2 rounded-full">
-              Tutoriales prácticos
-            </span>
-            <span className="bg-purple-600/20 text-purple-300 px-4 py-2 rounded-full">
-              Análisis profundos
-            </span>
-          </div>
-        </div>
-      </section>
-
-      {/* AdSense Banner */}
-      <div className="container mx-auto px-6 py-8">
-        <div className="bg-gray-100 rounded-lg p-4 text-center">
-          <ins
-            className="adsbygoogle block"
-            data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
-            data-ad-slot="YOUR_AD_SLOT_ID"
-            data-ad-format="auto"
-            data-full-width-responsive="true"
-          />
-        </div>
-      </div>
-
       {/* Articles Grid */}
       <section className="container mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -213,19 +176,6 @@ export default function BlogIndex({ initialPosts = [] }) {
           </div>
         )}
       </section>
-
-      {/* AdSense Footer */}
-      <div className="container mx-auto px-6 py-8">
-        <div className="bg-gray-100 rounded-lg p-4 text-center">
-          <ins
-            className="adsbygoogle block"
-            data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
-            data-ad-slot="YOUR_AD_SLOT_ID"
-            data-ad-format="auto"
-            data-full-width-responsive="true"
-          />
-        </div>
-      </div>
     </div>
   );
 }
