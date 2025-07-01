@@ -5,6 +5,26 @@ import BaseHead from '../../components/BaseHead.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import BlogIndex from '../../components/BlogIndex.jsx';
+import { getCollection } from 'astro:content';
+
+// Cargar artículos estáticos en el servidor para render inicial rápido
+let staticPosts = [];
+try {
+  const posts = await getCollection("blog");
+  staticPosts = posts.slice(0, 6).map((post) => ({
+    _id: post.id,
+    title: post.data.title,
+    excerpt: post.data.description,
+    category: "tutoriales-ia",
+    slug: post.id,
+    publishedAt: post.data.pubDate.toISOString(),
+    updatedAt: post.data.updatedDate?.toISOString() || post.data.pubDate.toISOString(),
+    isStatic: true,
+    tags: [],
+  }));
+} catch (error) {
+  console.warn("Error loading static posts in server:", error);
+}
 ---
 
 <!doctype html>
@@ -53,7 +73,7 @@ import BlogIndex from '../../components/BlogIndex.jsx';
 			</section>
 
 			<!-- Blog Content -->
-			<BlogIndex client:load />
+			<BlogIndex client:load initialPosts={staticPosts} />
 
 			<!-- AdSense Bottom Banner -->
 			<section class="container mx-auto px-6 py-8">

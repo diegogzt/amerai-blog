@@ -1,26 +1,60 @@
 import { useState, useEffect } from "react";
 
-export default function BlogIndex() {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
+export default function BlogIndex({ initialPosts = [] }) {
+  const [posts, setPosts] = useState(initialPosts);
+  const [loading, setLoading] = useState(initialPosts.length === 0);
   const [error, setError] = useState(null);
+  const [loadedFromAPI, setLoadedFromAPI] = useState(false);
 
   useEffect(() => {
-    loadPosts();
-  }, []);
+    // Solo cargar de la API si no tenemos posts iniciales o si queremos actualizar
+    if (initialPosts.length === 0 || !loadedFromAPI) {
+      const timeoutId = setTimeout(() => {
+        if (loading) {
+          setError("La carga está tomando más tiempo del esperado. Por favor, recarga la página.");
+          setLoading(false);
+        }
+      }, 10000); // 10 segundos timeout
+
+      loadPosts().finally(() => {
+        clearTimeout(timeoutId);
+      });
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [initialPosts.length, loadedFromAPI]);
 
   const loadPosts = async () => {
     try {
-      // Usar la nueva API que combina artículos estáticos y dinámicos
-      const response = await fetch("/api/articles-combined");
+      setLoading(true);
+      setError(null);
+      
+      // Crear AbortController para poder cancelar la request
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 8000); // 8 segundos timeout
+      
+      const response = await fetch("/api/articles-combined", {
+        signal: controller.signal,
+        headers: {
+          'Cache-Control': 'public, max-age=300'
+        }
+      });
+      
+      clearTimeout(timeoutId);
+      
       if (response.ok) {
         const data = await response.json();
         setPosts(data);
+        setLoadedFromAPI(true);
       } else {
-        setError("Error cargando los artículos");
+        throw new Error(`Error ${response.status}: ${response.statusText}`);
       }
     } catch (err) {
-      setError("Error de conexión");
+      if (err.name === 'AbortError') {
+        setError("La carga está tomando demasiado tiempo. Por favor, recarga la página.");
+      } else {
+        setError("Error cargando los artículos. Verifica tu conexión.");
+      }
       console.error("Error loading posts:", err);
     } finally {
       setLoading(false);

@@ -1,51 +1,44 @@
 import { getCollection } from "astro:content";
 import { getArticlesCollection } from "../../lib/mongodb.js";
 
+// Función helper para timeout
+function withTimeout(promise, ms) {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) =>
+      setTimeout(() => reject(new Error('Timeout')), ms)
+    )
+  ]);
+}
+
 export async function GET(request) {
   try {
-    // Obtener artículos dinámicos de MongoDB
-    let dynamicArticles = [];
-    try {
-      const collection = await getArticlesCollection();
-      const articles = await collection
-        .find({})
-        .sort({ publishedAt: -1 })
-        .toArray();
+    // Cargar ambos tipos de artículos en paralelo con timeout
+    const [dynamicArticles, staticArticles] = await Promise.allSettled([
+      // MongoDB con timeout de 3 segundos
+      withTimeout(loadDynamicArticles(), 3000),
+      // Artículos estáticos con timeout de 2 segundos  
+      withTimeout(loadStaticArticles(), 2000)
+    ]);
 
-      dynamicArticles = articles.map((article) => ({
-        ...article,
-        _id: article._id.toString(),
-        isStatic: false,
-      }));
-    } catch (mongoError) {
-      console.warn("Error loading dynamic articles from MongoDB:", mongoError);
-      // Continuar sin artículos dinámicos si MongoDB falla
+    const articles = [];
+    
+    // Procesar artículos dinámicos
+    if (dynamicArticles.status === 'fulfilled') {
+      articles.push(...dynamicArticles.value);
+    } else {
+      console.warn("Failed to load dynamic articles:", dynamicArticles.reason);
     }
-
-    // Obtener artículos estáticos de Astro
-    let staticArticles = [];
-    try {
-      const posts = await getCollection("blog");
-      staticArticles = posts.map((post) => ({
-        _id: post.id,
-        title: post.data.title,
-        excerpt: post.data.description,
-        category: "tutoriales-ia", // Categoría por defecto
-        slug: post.id,
-        publishedAt: post.data.pubDate.toISOString(),
-        updatedAt:
-          post.data.updatedDate?.toISOString() ||
-          post.data.pubDate.toISOString(),
-        isStatic: true,
-        tags: [],
-      }));
-    } catch (astroError) {
-      console.warn("Error loading static articles from Astro:", astroError);
-      // Continuar sin artículos estáticos si fallan
+    
+    // Procesar artículos estáticos
+    if (staticArticles.status === 'fulfilled') {
+      articles.push(...staticArticles.value);
+    } else {
+      console.warn("Failed to load static articles:", staticArticles.reason);
     }
 
     // Combinar ambos tipos de artículos
-    const allArticles = [...dynamicArticles, ...staticArticles];
+    const allArticles = articles;
 
     // Ordenar por fecha de publicación (más reciente primero)
     allArticles.sort(
@@ -57,6 +50,7 @@ export async function GET(request) {
       status: 200,
       headers: {
         "Content-Type": "application/json",
+        "Cache-Control": "public, max-age=300" // Cache por 5 minutos
       },
     });
   } catch (error) {
@@ -68,4 +62,34 @@ export async function GET(request) {
       },
     });
   }
+}
+
+async function loadDynamicArticles() {
+  const collection = await getArticlesCollection();
+  const articles = await collection
+    .find({})
+    .sort({ publishedAt: -1 })
+    .limit(20) // Limitar a 20 artículos
+    .toArray();
+
+  return articles.map((article) => ({
+    ...article,
+    _id: article._id.toString(),
+    isStatic: false,
+  }));
+}
+
+async function loadStaticArticles() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    _id: post.id,
+    title: post.data.title,
+    excerpt: post.data.description,
+    category: "tutoriales-ia",
+    slug: post.id,
+    publishedAt: post.data.pubDate.toISOString(),
+    updatedAt: post.data.updatedDate?.toISOString() || post.data.pubDate.toISOString(),
+    isStatic: true,
+    tags: [],
+  }));
 }
