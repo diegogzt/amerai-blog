@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import AdSenseAd from "./AdSenseAd.jsx";
 
 export default function BlogIndex({ initialPosts = [] }) {
   const [posts, setPosts] = useState(initialPosts);
@@ -23,6 +24,21 @@ export default function BlogIndex({ initialPosts = [] }) {
       return () => clearTimeout(timeoutId);
     }
   }, [initialPosts.length, loadedFromAPI]);
+
+  // Hook para activar AdSense cuando los posts se cargan
+  useEffect(() => {
+    if (posts.length > 0 && typeof window !== 'undefined' && window.adsbygoogle) {
+      try {
+        // Activar anuncios que se hayan añadido dinámicamente
+        const ads = document.querySelectorAll('.adsbygoogle:not([data-ad-status])');
+        ads.forEach(() => {
+          (window.adsbygoogle = window.adsbygoogle || []).push({});
+        });
+      } catch (error) {
+        console.warn('Error activating AdSense:', error);
+      }
+    }
+  }, [posts]);
 
   const loadPosts = async () => {
     try {
@@ -165,14 +181,13 @@ export default function BlogIndex({ initialPosts = [] }) {
         {/* AdSense In-Content */}
         {posts.length > 6 && (
           <div className="my-12">
-            <div className="bg-gray-100 rounded-lg p-4 text-center">
-              <ins
-                className="adsbygoogle block"
-                data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
-                data-ad-slot="YOUR_AD_SLOT_ID"
-                data-ad-format="rectangle"
-              />
-            </div>
+            <AdSenseAd 
+              client="ca-pub-4946584433561362"
+              slot="2062230511"
+              format="auto"
+              className="bg-white rounded-lg shadow-md p-4"
+              testMode={true}
+            />
           </div>
         )}
       </section>

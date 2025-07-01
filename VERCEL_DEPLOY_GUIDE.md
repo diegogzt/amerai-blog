@@ -17,6 +17,7 @@
 ### 2. **Configuración Automática**
 
 Vercel detectará automáticamente que es un proyecto **Astro** y configurará:
+
 - ✅ **Framework**: Astro
 - ✅ **Build Command**: `npm run build`
 - ✅ **Output Directory**: `dist`
@@ -34,6 +35,7 @@ ADMIN_PASSWORD=tu_password_seguro_aqui
 ```
 
 **Cómo configurarlas:**
+
 1. En el proyecto de Vercel, ve a **Settings**
 2. Haz clic en **Environment Variables**
 3. Añade cada variable una por una
@@ -94,6 +96,7 @@ ADMIN_PASSWORD=tu_password_seguro_aqui
 ## 🔄 Updates Automáticos
 
 Cada vez que hagas `git push` a la rama `main`, Vercel automáticamente:
+
 1. Detectará los cambios
 2. Hará un nuevo build
 3. Deployará la nueva versión
@@ -120,16 +123,19 @@ git push origin main
 ## 🆘 Troubleshooting
 
 ### Si el build falla:
+
 1. Revisa las **Build Logs** en Vercel
 2. Verifica que todas las variables de entorno están configuradas
 3. Asegúrate de que `MONGODB_URI` sea válida
 
 ### Si las APIs no funcionan:
+
 1. Verifica **Function Logs** en Vercel
 2. Comprueba la conexión a MongoDB
 3. Revisa que `MONGODB_DB` sea el nombre correcto
 
 ### Si el admin no funciona:
+
 1. Verifica `ADMIN_USERNAME` y `ADMIN_PASSWORD`
 2. Comprueba que no hay espacios extra en las variables
 3. Intenta hacer login con las credenciales exactas
@@ -147,6 +153,7 @@ git push origin main
 ## 📞 Support
 
 Si tienes problemas:
+
 1. Revisa los logs en Vercel Dashboard
 2. Comprueba la consola del navegador
 3. Verifica la conexión a MongoDB Atlas

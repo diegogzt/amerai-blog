@@ -6,8 +6,8 @@ function withTimeout(promise, ms) {
   return Promise.race([
     promise,
     new Promise((_, reject) =>
-      setTimeout(() => reject(new Error('Timeout')), ms)
-    )
+      setTimeout(() => reject(new Error("Timeout")), ms)
+    ),
   ]);
 }
 
@@ -17,21 +17,21 @@ export async function GET(request) {
     const [dynamicArticles, staticArticles] = await Promise.allSettled([
       // MongoDB con timeout de 3 segundos
       withTimeout(loadDynamicArticles(), 3000),
-      // Artículos estáticos con timeout de 2 segundos  
-      withTimeout(loadStaticArticles(), 2000)
+      // Artículos estáticos con timeout de 2 segundos
+      withTimeout(loadStaticArticles(), 2000),
     ]);
 
     const articles = [];
-    
+
     // Procesar artículos dinámicos
-    if (dynamicArticles.status === 'fulfilled') {
+    if (dynamicArticles.status === "fulfilled") {
       articles.push(...dynamicArticles.value);
     } else {
       console.warn("Failed to load dynamic articles:", dynamicArticles.reason);
     }
-    
+
     // Procesar artículos estáticos
-    if (staticArticles.status === 'fulfilled') {
+    if (staticArticles.status === "fulfilled") {
       articles.push(...staticArticles.value);
     } else {
       console.warn("Failed to load static articles:", staticArticles.reason);
@@ -50,7 +50,7 @@ export async function GET(request) {
       status: 200,
       headers: {
         "Content-Type": "application/json",
-        "Cache-Control": "public, max-age=300" // Cache por 5 minutos
+        "Cache-Control": "public, max-age=300", // Cache por 5 minutos
       },
     });
   } catch (error) {
@@ -88,7 +88,8 @@ async function loadStaticArticles() {
     category: "tutoriales-ia",
     slug: post.id,
     publishedAt: post.data.pubDate.toISOString(),
-    updatedAt: post.data.updatedDate?.toISOString() || post.data.pubDate.toISOString(),
+    updatedAt:
+      post.data.updatedDate?.toISOString() || post.data.pubDate.toISOString(),
     isStatic: true,
     tags: [],
   }));

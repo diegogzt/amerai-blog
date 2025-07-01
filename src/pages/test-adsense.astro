@@ -1,0 +1,169 @@
+---
+export const prerender = false;
+
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<BaseHead title="Test AdSense - AmerAI" description="Página de prueba para verificar Google AdSense" />
+		<!-- Google AdSense con debug -->
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4946584433561362"
+			crossorigin="anonymous" data-ad-frequency-hint="30s"></script>
+		<script is:inline>
+			window.adsbygoogle = window.adsbygoogle || [];
+			// Habilitar modo debug para AdSense
+			window.adsbygoogle.push({
+				google_ad_client: "ca-pub-4946584433561362",
+				enable_page_level_ads: true
+			});
+		</script>
+	</head>
+	<body class="bg-gray-50">
+		<Header />
+		
+		<main>
+			<!-- Hero Section -->
+			<section class="bg-gradient-to-br from-gray-900 via-gray-800 to-green-900 text-white py-20">
+				<div class="container mx-auto px-6 text-center">
+					<h1 class="text-5xl md:text-6xl font-bold mb-6">
+						Test <span class="text-green-400">AdSense</span>
+					</h1>
+					<p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
+						Página de prueba para verificar que Google AdSense funciona correctamente
+					</p>
+				</div>
+			</section>
+
+			<!-- Test AdSense 1 - Banner Superior -->
+			<section class="container mx-auto px-6 py-8">
+				<h2 class="text-2xl font-bold mb-4">Banner Superior</h2>
+				<div class="bg-white rounded-lg shadow-md p-4 mb-8">
+					<ins class="adsbygoogle"
+						style="display:block"
+						data-ad-client="ca-pub-4946584433561362"
+						data-ad-slot="2062230511"
+						data-ad-format="auto"
+						data-full-width-responsive="true"></ins>
+					<script is:inline>
+						(window.adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+				</div>
+			</section>
+
+			<!-- Contenido de ejemplo -->
+			<section class="container mx-auto px-6 py-8">
+				<div class="bg-white rounded-lg shadow-md p-8">
+					<h2 class="text-3xl font-bold mb-6">Contenido de Ejemplo</h2>
+					<p class="text-lg text-gray-700 mb-4">
+						Este es contenido de ejemplo para separar los anuncios y verificar que se muestran correctamente.
+					</p>
+					<p class="text-gray-600 mb-4">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+						Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+					</p>
+					<p class="text-gray-600 mb-4">
+						Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+						Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					</p>
+				</div>
+			</section>
+
+			<!-- Test AdSense 2 - Banner Medio -->
+			<section class="container mx-auto px-6 py-8">
+				<h2 class="text-2xl font-bold mb-4">Banner Medio</h2>
+				<div class="bg-white rounded-lg shadow-md p-4 mb-8">
+					<ins class="adsbygoogle"
+						style="display:block"
+						data-ad-client="ca-pub-4946584433561362"
+						data-ad-slot="2062230511"
+						data-ad-format="rectangle"
+						data-ad-region="test-ad-2"></ins>
+					<script is:inline>
+						(window.adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+				</div>
+			</section>
+
+			<!-- Más contenido -->
+			<section class="container mx-auto px-6 py-8">
+				<div class="bg-white rounded-lg shadow-md p-8">
+					<h2 class="text-3xl font-bold mb-6">Más Contenido</h2>
+					<p class="text-lg text-gray-700 mb-4">
+						Más contenido para verificar el espaciado y la visualización de anuncios.
+					</p>
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+						<div class="bg-gray-100 p-4 rounded">
+							<h3 class="font-bold mb-2">Columna 1</h3>
+							<p class="text-gray-600">Contenido de la primera columna para crear más altura en la página.</p>
+						</div>
+						<div class="bg-gray-100 p-4 rounded">
+							<h3 class="font-bold mb-2">Columna 2</h3>
+							<p class="text-gray-600">Contenido de la segunda columna para crear más altura en la página.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Test AdSense 3 - Banner Inferior -->
+			<section class="container mx-auto px-6 py-8">
+				<h2 class="text-2xl font-bold mb-4">Banner Inferior</h2>
+				<div class="bg-white rounded-lg shadow-md p-4">
+					<ins class="adsbygoogle"
+						style="display:block"
+						data-ad-client="ca-pub-4946584433561362"
+						data-ad-slot="2062230511"
+						data-ad-format="auto"
+						data-full-width-responsive="true"
+						data-ad-region="test-ad-3"></ins>
+					<script is:inline>
+						(window.adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+				</div>
+			</section>
+
+			<!-- Debug info -->
+			<section class="container mx-auto px-6 py-8">
+				<div class="bg-yellow-100 border-l-4 border-yellow-500 p-4">
+					<h3 class="font-bold text-yellow-800 mb-2">Debug Information</h3>
+					<p class="text-yellow-700 text-sm">
+						• AdSense Client ID: ca-pub-4946584433561362<br>
+						• Slot ID: 2062230511<br>
+						• Si los anuncios no aparecen, verifica en la consola del navegador<br>
+						• Los anuncios pueden tardar unos segundos en cargarse<br>
+						• En desarrollo, los anuncios pueden mostrar espacios en blanco
+					</p>
+				</div>
+			</section>
+		</main>
+		
+		<Footer />
+
+		<!-- Script adicional para debug -->
+		<script is:inline>
+			// Debug script para AdSense
+			window.addEventListener('load', function() {
+				console.log('AdSense Debug Information:');
+				console.log('adsbygoogle array:', window.adsbygoogle);
+				console.log('AdSense elements:', document.querySelectorAll('.adsbygoogle').length);
+				
+				// Verificar estado de los anuncios
+				setTimeout(() => {
+					const ads = document.querySelectorAll('.adsbygoogle');
+					ads.forEach((ad, index) => {
+						console.log(`Ad ${index + 1}:`, {
+							status: ad.getAttribute('data-ad-status'),
+							client: ad.getAttribute('data-ad-client'),
+							slot: ad.getAttribute('data-ad-slot'),
+							height: ad.style.height,
+							display: ad.style.display
+						});
+					});
+				}, 3000);
+			});
+		</script>
+	</body>
+</html>
