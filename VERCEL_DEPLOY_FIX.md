@@ -10,6 +10,24 @@ Require stack:
 - /vercel/path0/apps/astro-blog/tailwind.config.js
 ```
 
+## 🔄 **NUEVO ERROR RESUELTO** (1 julio 2025)
+
+**Error Crítico en Deploy:**
+
+```
+Error: Importing "@astrojs/vercel": Cannot find module '/vercel/path0/.vercel/builders/node_modules/@astrojs/vercel/index.js'
+```
+
+**Causa:** Configuración deprecated en `vercel.json` utilizando `builds` en lugar de detección automática.
+
+**Solución Implementada:**
+
+- ✅ Simplificado `vercel.json` a `{"framework": "astro"}`
+- ✅ Actualizada importación de `@astrojs/vercel/serverless` a `@astrojs/vercel`
+- ✅ Agregado `.vercelignore` para optimización
+- ✅ Limpieza completa de dependencias
+- ✅ Build local verificado exitosamente
+
 ## ✅ Soluciones Implementadas
 
 ### **1. Dependencias Corregidas**
