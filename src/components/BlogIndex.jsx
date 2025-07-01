@@ -153,7 +153,9 @@ export default function BlogIndex() {
                 </p>
 
                 <a
-                  href={post.isStatic ? `/blog/${post.slug}` : `/blog/${post.slug}`}
+                  href={
+                    post.isStatic ? `/blog/${post.slug}` : `/blog/${post.slug}`
+                  }
                   className="inline-flex items-center text-green-600 hover:text-green-700 font-medium transition-colors"
                 >
                   Leer más →
