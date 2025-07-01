@@ -55,3 +55,15 @@ const { title, description, image = FallbackImage } = Astro.props;
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image.src, Astro.url)} />
+
+<!-- Google AdSense Auto Ads -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4946584433561362"
+	crossorigin="anonymous"></script>
+<script is:inline>
+	window.adsbygoogle = window.adsbygoogle || [];
+	// Auto Ads configuration
+	(adsbygoogle = window.adsbygoogle || []).push({
+		google_ad_client: "ca-pub-4946584433561362",
+		enable_page_level_ads: true
+	});
+</script>

@@ -1,0 +1,180 @@
+---
+export const prerender = false;
+
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<BaseHead title="AdSense Simple Test - AmerAI" description="Prueba básica de Google AdSense" />
+		<!-- Google AdSense - Configuración más simple -->
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4946584433561362"
+			crossorigin="anonymous"></script>
+	</head>
+	<body class="bg-gray-50">
+		<Header />
+		
+		<main>
+			<!-- Hero Section -->
+			<section class="bg-gradient-to-br from-gray-900 via-gray-800 to-green-900 text-white py-20">
+				<div class="container mx-auto px-6 text-center">
+					<h1 class="text-5xl md:text-6xl font-bold mb-6">
+						AdSense <span class="text-green-400">Simple</span>
+					</h1>
+					<p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
+						Prueba más básica de Google AdSense sin configuraciones complejas
+					</p>
+				</div>
+			</section>
+
+			<!-- Verificación del Publisher ID -->
+			<section class="container mx-auto px-6 py-8">
+				<div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 mb-8">
+					<h3 class="font-bold text-yellow-800 mb-2">⚠️ Información Importante</h3>
+					<p class="text-yellow-700 text-sm">
+						<strong>Publisher ID actual:</strong> ca-pub-4946584433561362<br>
+						<strong>Slot ID:</strong> 2062230511<br><br>
+						<strong>Posibles razones por las que no se ven anuncios:</strong><br>
+						• El Publisher ID no está aprobado o es incorrecto<br>
+						• El dominio localhost no está autorizado en AdSense<br>
+						• La cuenta de AdSense está suspendida o en revisión<br>
+						• Los anuncios necesitan tráfico real para activarse<br>
+						• El slot ID no existe o está mal configurado
+					</p>
+				</div>
+			</section>
+
+			<!-- Test 1: Anuncio Auto -->
+			<section class="container mx-auto px-6 py-8">
+				<h2 class="text-2xl font-bold mb-4">Test 1: Anuncio Automático</h2>
+				<div class="bg-white rounded-lg shadow-md p-4 mb-8">
+					<div style="border: 1px dashed #ccc; padding: 10px; margin: 10px 0;">
+						<p class="text-sm text-gray-500 mb-2">👇 Anuncio debería aparecer aquí:</p>
+						<ins class="adsbygoogle"
+							style="display:block"
+							data-ad-client="ca-pub-4946584433561362"
+							data-ad-slot="2062230511"
+							data-ad-format="auto"
+							data-full-width-responsive="true"></ins>
+					</div>
+				</div>
+			</section>
+
+			<!-- Test 2: Anuncio Display -->
+			<section class="container mx-auto px-6 py-8">
+				<h2 class="text-2xl font-bold mb-4">Test 2: Anuncio Display</h2>
+				<div class="bg-white rounded-lg shadow-md p-4 mb-8">
+					<div style="border: 1px dashed #ccc; padding: 10px; margin: 10px 0;">
+						<p class="text-sm text-gray-500 mb-2">👇 Anuncio display debería aparecer aquí:</p>
+						<ins class="adsbygoogle"
+							style="display:inline-block;width:728px;height:90px"
+							data-ad-client="ca-pub-4946584433561362"
+							data-ad-slot="2062230511"></ins>
+					</div>
+				</div>
+			</section>
+
+			<!-- Test 3: Anuncio Responsive -->
+			<section class="container mx-auto px-6 py-8">
+				<h2 class="text-2xl font-bold mb-4">Test 3: Anuncio Responsive</h2>
+				<div class="bg-white rounded-lg shadow-md p-4 mb-8">
+					<div style="border: 1px dashed #ccc; padding: 10px; margin: 10px 0;">
+						<p class="text-sm text-gray-500 mb-2">👇 Anuncio responsive debería aparecer aquí:</p>
+						<ins class="adsbygoogle"
+							style="display:block"
+							data-ad-format="autorelaxed"
+							data-ad-client="ca-pub-4946584433561362"
+							data-ad-slot="2062230511"></ins>
+					</div>
+				</div>
+			</section>
+
+			<!-- Contenido de separación -->
+			<section class="container mx-auto px-6 py-8">
+				<div class="bg-white rounded-lg shadow-md p-8">
+					<h2 class="text-3xl font-bold mb-6">Contenido Real</h2>
+					<p class="text-lg text-gray-700 mb-4">
+						Este contenido simula un artículo real para que AdSense pueda evaluar el contexto de la página.
+					</p>
+					<p class="text-gray-600 mb-4">
+						Los anuncios de Google AdSense necesitan contenido relevante y de calidad para funcionar correctamente. 
+						Esta página simula un blog sobre inteligencia artificial y tecnología.
+					</p>
+					<p class="text-gray-600 mb-4">
+						Temas relacionados: machine learning, deep learning, redes neuronales, procesamiento de lenguaje natural,
+						computer vision, robótica, automatización, big data, análisis de datos, algoritmos.
+					</p>
+				</div>
+			</section>
+
+			<!-- Diagnóstico automático -->
+			<section class="container mx-auto px-6 py-8">
+				<div class="bg-blue-100 border-l-4 border-blue-500 p-4">
+					<h3 class="font-bold text-blue-800 mb-2">🔍 Diagnóstico Automático</h3>
+					<div id="diagnostic" class="text-blue-700 text-sm">
+						Ejecutando diagnóstico...
+					</div>
+				</div>
+			</section>
+		</main>
+		
+		<Footer />
+
+		<!-- Scripts de AdSense y Diagnóstico -->
+		<script>
+			// Esperar a que se cargue completamente
+			(adsbygoogle = window.adsbygoogle || []).push({});
+			(adsbygoogle = window.adsbygoogle || []).push({});
+			(adsbygoogle = window.adsbygoogle || []).push({});
+		</script>
+
+		<script>
+			// Diagnóstico completo
+			window.addEventListener('load', function() {
+				const diagnosticDiv = document.getElementById('diagnostic');
+				let diagnosticText = '';
+				
+				// Verificar script de AdSense
+				const adsenseScript = document.querySelector('script[src*="adsbygoogle.js"]');
+				diagnosticText += `✓ Script AdSense: ${adsenseScript ? 'Cargado' : 'NO ENCONTRADO'}<br>`;
+				
+				// Verificar variable global
+				diagnosticText += `✓ window.adsbygoogle: ${window.adsbygoogle ? 'Disponible' : 'NO DISPONIBLE'}<br>`;
+				
+				// Verificar elementos de anuncios
+				const ads = document.querySelectorAll('.adsbygoogle');
+				diagnosticText += `✓ Elementos de anuncios: ${ads.length} encontrados<br>`;
+				
+				// Verificar network requests
+				diagnosticText += `✓ Publisher ID: ca-pub-4946584433561362<br>`;
+				diagnosticText += `✓ Dominio actual: ${window.location.hostname}<br>`;
+				diagnosticText += `✓ Protocolo: ${window.location.protocol}<br><br>`;
+				
+				diagnosticText += `<strong>Recomendaciones:</strong><br>`;
+				if (window.location.hostname === 'localhost') {
+					diagnosticText += `⚠️ Estás en localhost - AdSense puede no funcionar<br>`;
+				}
+				
+				diagnosticText += `• Verifica que el Publisher ID sea correcto en tu cuenta AdSense<br>`;
+				diagnosticText += `• Asegúrate de que el dominio esté autorizado<br>`;
+				diagnosticText += `• Los anuncios pueden tardar 24-48h en activarse en sitios nuevos<br>`;
+				
+				diagnosticDiv.innerHTML = diagnosticText;
+				
+				// Verificar después de 5 segundos
+				setTimeout(() => {
+					let statusText = '<br><strong>Estado después de 5 segundos:</strong><br>';
+					ads.forEach((ad, index) => {
+						const hasContent = ad.innerHTML.length > 50;
+						const height = ad.offsetHeight;
+						statusText += `Anuncio ${index + 1}: ${hasContent ? '✓ Contenido detectado' : '✗ Sin contenido'} (${height}px alto)<br>`;
+					});
+					diagnosticDiv.innerHTML += statusText;
+				}, 5000);
+			});
+		</script>
+	</body>
+</html>

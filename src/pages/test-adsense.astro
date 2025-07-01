@@ -10,17 +10,6 @@ import Footer from '../components/Footer.astro';
 <html lang="es">
 	<head>
 		<BaseHead title="Test AdSense - AmerAI" description="Página de prueba para verificar Google AdSense" />
-		<!-- Google AdSense con debug -->
-		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4946584433561362"
-			crossorigin="anonymous" data-ad-frequency-hint="30s"></script>
-		<script is:inline>
-			window.adsbygoogle = window.adsbygoogle || [];
-			// Habilitar modo debug para AdSense
-			window.adsbygoogle.push({
-				google_ad_client: "ca-pub-4946584433561362",
-				enable_page_level_ads: true
-			});
-		</script>
 	</head>
 	<body class="bg-gray-50">
 		<Header />
@@ -41,15 +30,19 @@ import Footer from '../components/Footer.astro';
 			<!-- Test AdSense 1 - Banner Superior -->
 			<section class="container mx-auto px-6 py-8">
 				<h2 class="text-2xl font-bold mb-4">Banner Superior</h2>
-				<div class="bg-white rounded-lg shadow-md p-4 mb-8">
+				<div class="bg-white rounded-lg shadow-md p-4 mb-8 min-h-[250px]">
 					<ins class="adsbygoogle"
-						style="display:block"
+						style="display:block; min-height:200px;"
 						data-ad-client="ca-pub-4946584433561362"
 						data-ad-slot="2062230511"
 						data-ad-format="auto"
 						data-full-width-responsive="true"></ins>
 					<script is:inline>
-						(window.adsbygoogle = window.adsbygoogle || []).push({});
+						try {
+							(adsbygoogle = window.adsbygoogle || []).push({});
+						} catch (e) {
+							console.error('AdSense error:', e);
+						}
 					</script>
 				</div>
 			</section>
@@ -75,15 +68,19 @@ import Footer from '../components/Footer.astro';
 			<!-- Test AdSense 2 - Banner Medio -->
 			<section class="container mx-auto px-6 py-8">
 				<h2 class="text-2xl font-bold mb-4">Banner Medio</h2>
-				<div class="bg-white rounded-lg shadow-md p-4 mb-8">
+				<div class="bg-white rounded-lg shadow-md p-4 mb-8 min-h-[250px]">
 					<ins class="adsbygoogle"
-						style="display:block"
+						style="display:block; min-height:200px;"
 						data-ad-client="ca-pub-4946584433561362"
 						data-ad-slot="2062230511"
-						data-ad-format="rectangle"
-						data-ad-region="test-ad-2"></ins>
+						data-ad-format="auto"
+						data-full-width-responsive="true"></ins>
 					<script is:inline>
-						(window.adsbygoogle = window.adsbygoogle || []).push({});
+						try {
+							(adsbygoogle = window.adsbygoogle || []).push({});
+						} catch (e) {
+							console.error('AdSense error:', e);
+						}
 					</script>
 				</div>
 			</section>
@@ -111,16 +108,19 @@ import Footer from '../components/Footer.astro';
 			<!-- Test AdSense 3 - Banner Inferior -->
 			<section class="container mx-auto px-6 py-8">
 				<h2 class="text-2xl font-bold mb-4">Banner Inferior</h2>
-				<div class="bg-white rounded-lg shadow-md p-4">
+				<div class="bg-white rounded-lg shadow-md p-4 min-h-[250px]">
 					<ins class="adsbygoogle"
-						style="display:block"
+						style="display:block; min-height:200px;"
 						data-ad-client="ca-pub-4946584433561362"
 						data-ad-slot="2062230511"
 						data-ad-format="auto"
-						data-full-width-responsive="true"
-						data-ad-region="test-ad-3"></ins>
+						data-full-width-responsive="true"></ins>
 					<script is:inline>
-						(window.adsbygoogle = window.adsbygoogle || []).push({});
+						try {
+							(adsbygoogle = window.adsbygoogle || []).push({});
+						} catch (e) {
+							console.error('AdSense error:', e);
+						}
 					</script>
 				</div>
 			</section>
@@ -146,23 +146,69 @@ import Footer from '../components/Footer.astro';
 		<script is:inline>
 			// Debug script para AdSense
 			window.addEventListener('load', function() {
-				console.log('AdSense Debug Information:');
-				console.log('adsbygoogle array:', window.adsbygoogle);
-				console.log('AdSense elements:', document.querySelectorAll('.adsbygoogle').length);
+				console.log('=== AdSense Debug Information ===');
+				console.log('adsbygoogle disponible:', !!window.adsbygoogle);
+				console.log('adsbygoogle array length:', window.adsbygoogle?.length || 0);
+				console.log('AdSense elements encontrados:', document.querySelectorAll('.adsbygoogle').length);
 				
-				// Verificar estado de los anuncios
+				// Verificar si el script de AdSense se cargó
+				const adsenseScript = document.querySelector('script[src*="adsbygoogle.js"]');
+				console.log('Script AdSense cargado:', !!adsenseScript);
+				
+				// Verificar estado de los anuncios después de 3 segundos
 				setTimeout(() => {
+					console.log('=== Estado de Anuncios (3s después) ===');
 					const ads = document.querySelectorAll('.adsbygoogle');
 					ads.forEach((ad, index) => {
-						console.log(`Ad ${index + 1}:`, {
+						const info = {
+							index: index + 1,
 							status: ad.getAttribute('data-ad-status'),
 							client: ad.getAttribute('data-ad-client'),
 							slot: ad.getAttribute('data-ad-slot'),
-							height: ad.style.height,
-							display: ad.style.display
-						});
+							height: ad.style.height || ad.offsetHeight + 'px',
+							width: ad.style.width || ad.offsetWidth + 'px',
+							display: ad.style.display,
+							innerHTML: ad.innerHTML.length + ' chars',
+							hasIframe: !!ad.querySelector('iframe')
+						};
+						console.log(`Anuncio ${info.index}:`, info);
+						
+						// Mostrar información visual en la página
+						if (!ad.querySelector('.debug-info')) {
+							const debugDiv = document.createElement('div');
+							debugDiv.className = 'debug-info';
+							debugDiv.style.cssText = 'background:#f0f0f0;padding:8px;margin:4px;font-size:12px;border-radius:4px;';
+							debugDiv.innerHTML = `
+								<strong>Debug Ad ${info.index}:</strong><br>
+								Status: ${info.status || 'undefined'}<br>
+								Height: ${info.height}<br>
+								Width: ${info.width}<br>
+								Iframe: ${info.hasIframe ? 'Sí' : 'No'}<br>
+								Content: ${info.innerHTML} characters
+							`;
+							ad.parentElement.appendChild(debugDiv);
+						}
 					});
 				}, 3000);
+				
+				// Verificar nuevamente después de 10 segundos
+				setTimeout(() => {
+					console.log('=== Estado Final (10s después) ===');
+					const ads = document.querySelectorAll('.adsbygoogle');
+					let working = 0;
+					ads.forEach((ad, index) => {
+						const hasContent = ad.innerHTML.length > 50 || ad.offsetHeight > 50;
+						if (hasContent) working++;
+						console.log(`Anuncio ${index + 1} funcionando:`, hasContent);
+					});
+					console.log(`Total anuncios funcionando: ${working}/${ads.length}`);
+					
+					// Mostrar resultado en la página
+					const resultDiv = document.createElement('div');
+					resultDiv.style.cssText = 'position:fixed;top:10px;right:10px;background:#333;color:white;padding:10px;border-radius:5px;z-index:9999;';
+					resultDiv.innerHTML = `AdSense Status: ${working}/${ads.length} funcionando`;
+					document.body.appendChild(resultDiv);
+				}, 10000);
 			});
 		</script>
 	</body>
