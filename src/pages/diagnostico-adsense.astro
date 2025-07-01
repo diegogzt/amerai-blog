@@ -1,0 +1,275 @@
+---
+export const prerender = false;
+
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<BaseHead title="Diagnóstico AdSense - AmerAI" description="Página de diagnóstico completo para Google AdSense" />
+		<meta name="robots" content="noindex, nofollow">
+	</head>
+	<body class="bg-gray-50">
+		<Header />
+		
+		<main>
+			<!-- Header de diagnóstico -->
+			<section class="bg-red-100 border-l-4 border-red-500 p-6 m-6">
+				<h1 class="text-2xl font-bold text-red-800 mb-4">🔍 Diagnóstico Completo AdSense</h1>
+				<p class="text-red-700">Esta página diagnostica todos los aspectos de AdSense para identificar problemas.</p>
+			</section>
+
+			<!-- Información del script -->
+			<section class="container mx-auto px-6 py-4">
+				<div class="bg-white rounded-lg shadow-md p-6 mb-6">
+					<h2 class="text-xl font-bold mb-4">📋 Estado del Script AdSense</h2>
+					<div id="script-status" class="space-y-2">
+						<div>🔄 Verificando...</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Test básico manual -->
+			<section class="container mx-auto px-6 py-4">
+				<div class="bg-white rounded-lg shadow-md p-6 mb-6">
+					<h2 class="text-xl font-bold mb-4">🧪 Test Anuncio Básico</h2>
+					<p class="text-gray-600 mb-4">Anuncio manual básico sin configuraciones especiales:</p>
+					
+					<div class="border-2 border-dashed border-gray-300 p-4 mb-4">
+						<ins class="adsbygoogle"
+							style="display:block"
+							data-ad-client="ca-pub-4946584433561362"
+							data-ad-slot="2062230511"
+							data-ad-format="auto"></ins>
+					</div>
+					
+					<button onclick="loadManualAd()" class="bg-blue-500 text-white px-4 py-2 rounded">
+						🔄 Cargar Anuncio Manual
+					</button>
+					<div id="manual-ad-status" class="mt-2 text-sm text-gray-600"></div>
+				</div>
+			</section>
+
+			<!-- Test con diferentes configuraciones -->
+			<section class="container mx-auto px-6 py-4">
+				<div class="bg-white rounded-lg shadow-md p-6 mb-6">
+					<h2 class="text-xl font-bold mb-4">🎛️ Test Diferentes Configuraciones</h2>
+					
+					<!-- Banner horizontal -->
+					<div class="mb-6">
+						<h3 class="font-bold mb-2">Banner Horizontal (728x90)</h3>
+						<div class="border-2 border-dashed border-blue-300 p-4">
+							<ins class="adsbygoogle"
+								style="display:inline-block;width:728px;height:90px"
+								data-ad-client="ca-pub-4946584433561362"
+								data-ad-slot="2062230511"></ins>
+						</div>
+					</div>
+
+					<!-- Banner cuadrado -->
+					<div class="mb-6">
+						<h3 class="font-bold mb-2">Banner Cuadrado (250x250)</h3>
+						<div class="border-2 border-dashed border-green-300 p-4">
+							<ins class="adsbygoogle"
+								style="display:inline-block;width:250px;height:250px"
+								data-ad-client="ca-pub-4946584433561362"
+								data-ad-slot="2062230511"></ins>
+						</div>
+					</div>
+
+					<!-- Banner responsivo -->
+					<div class="mb-6">
+						<h3 class="font-bold mb-2">Banner Responsivo</h3>
+						<div class="border-2 border-dashed border-purple-300 p-4">
+							<ins class="adsbygoogle"
+								style="display:block"
+								data-ad-client="ca-pub-4946584433561362"
+								data-ad-slot="2062230511"
+								data-ad-format="auto"
+								data-full-width-responsive="true"></ins>
+						</div>
+					</div>
+
+					<button onclick="loadAllTestAds()" class="bg-green-500 text-white px-4 py-2 rounded">
+						🚀 Cargar Todos los Anuncios
+					</button>
+				</div>
+			</section>
+
+			<!-- Información de depuración -->
+			<section class="container mx-auto px-6 py-4">
+				<div class="bg-gray-100 rounded-lg p-6 mb-6">
+					<h2 class="text-xl font-bold mb-4">🔧 Información de Debug</h2>
+					<div id="debug-info" class="space-y-2 text-sm font-mono">
+						<div>🔄 Recopilando información...</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Posibles problemas -->
+			<section class="container mx-auto px-6 py-4">
+				<div class="bg-yellow-50 border-l-4 border-yellow-400 p-6">
+					<h2 class="text-xl font-bold text-yellow-800 mb-4">⚠️ Posibles Causas</h2>
+					<ul class="list-disc list-inside text-yellow-700 space-y-1">
+						<li><strong>Desarrollo Local:</strong> AdSense no muestra anuncios reales en localhost</li>
+						<li><strong>Publisher ID:</strong> El ID ca-pub-4946584433561362 puede no ser válido</li>
+						<li><strong>Slot ID:</strong> El slot 2062230511 puede no existir</li>
+						<li><strong>Cuenta AdSense:</strong> La cuenta puede estar en revisión o suspendida</li>
+						<li><strong>Dominio:</strong> El dominio puede no estar autorizado en AdSense</li>
+						<li><strong>Bloqueador de anuncios:</strong> El navegador puede estar bloqueando los anuncios</li>
+						<li><strong>Política de contenido:</strong> El contenido puede no cumplir las políticas</li>
+					</ul>
+				</div>
+			</section>
+		</main>
+		
+		<Footer />
+
+		<!-- Script de diagnóstico -->
+		<script is:inline>
+			let diagnosticsRunning = false;
+
+			function updateStatus(elementId, message, isError = false) {
+				const element = document.getElementById(elementId);
+				if (element) {
+					element.innerHTML = isError ? 
+						`<div class="text-red-600">❌ ${message}</div>` : 
+						`<div class="text-green-600">✅ ${message}</div>`;
+				}
+			}
+
+			function addDebugInfo(message) {
+				const debugElement = document.getElementById('debug-info');
+				if (debugElement) {
+					const div = document.createElement('div');
+					div.innerHTML = `<span class="text-gray-500">${new Date().toLocaleTimeString()}</span> ${message}`;
+					debugElement.appendChild(div);
+				}
+			}
+
+			function loadManualAd() {
+				const statusEl = document.getElementById('manual-ad-status');
+				statusEl.innerHTML = '🔄 Cargando anuncio manual...';
+				
+				try {
+					if (window.adsbygoogle) {
+						// Buscar el primer anuncio manual
+						const ads = document.querySelectorAll('.adsbygoogle');
+						const manualAd = ads[ads.length - 4]; // El anuncio manual básico
+						
+						if (manualAd && !manualAd.hasAttribute('data-ad-status')) {
+							(window.adsbygoogle = window.adsbygoogle || []).push({});
+							statusEl.innerHTML = '✅ Push ejecutado. Verificando en 3 segundos...';
+							
+							setTimeout(() => {
+								const status = manualAd.getAttribute('data-ad-status');
+								const height = manualAd.style.height;
+								statusEl.innerHTML = `📊 Status: ${status || 'none'}, Height: ${height || 'none'}`;
+							}, 3000);
+						} else {
+							statusEl.innerHTML = '⚠️ Anuncio ya procesado o no encontrado';
+						}
+					} else {
+						statusEl.innerHTML = '❌ AdSense no disponible';
+					}
+				} catch (error) {
+					statusEl.innerHTML = `❌ Error: ${error.message}`;
+				}
+			}
+
+			function loadAllTestAds() {
+				try {
+					const ads = document.querySelectorAll('.adsbygoogle:not([data-ad-status])');
+					addDebugInfo(`🔄 Cargando ${ads.length} anuncios...`);
+					
+					ads.forEach((ad, index) => {
+						setTimeout(() => {
+							(window.adsbygoogle = window.adsbygoogle || []).push({});
+							addDebugInfo(`📤 Push ${index + 1} ejecutado`);
+						}, index * 500); // Espaciar las cargas
+					});
+					
+					// Verificar resultados después de 5 segundos
+					setTimeout(() => {
+						const allAds = document.querySelectorAll('.adsbygoogle');
+						allAds.forEach((ad, index) => {
+							const status = ad.getAttribute('data-ad-status');
+							const height = ad.style.height;
+							addDebugInfo(`📊 Anuncio ${index + 1}: Status=${status || 'none'}, Height=${height || 'none'}`);
+						});
+					}, 5000);
+					
+				} catch (error) {
+					addDebugInfo(`❌ Error: ${error.message}`);
+				}
+			}
+
+			function runDiagnostics() {
+				if (diagnosticsRunning) return;
+				diagnosticsRunning = true;
+
+				const scriptStatus = document.getElementById('script-status');
+				const debugInfo = document.getElementById('debug-info');
+				
+				// Limpiar debug
+				debugInfo.innerHTML = '<div>🔄 Iniciando diagnóstico...</div>';
+				
+				// Verificar script AdSense
+				addDebugInfo('🔍 Verificando script AdSense...');
+				
+				setTimeout(() => {
+					// Verificar window.adsbygoogle
+					if (typeof window.adsbygoogle !== 'undefined') {
+						scriptStatus.innerHTML = `
+							<div class="text-green-600">✅ window.adsbygoogle existe</div>
+							<div class="text-blue-600">📊 Array length: ${window.adsbygoogle.length}</div>
+							<div class="text-gray-600">🔧 Type: ${typeof window.adsbygoogle}</div>
+						`;
+						addDebugInfo('✅ window.adsbygoogle está disponible');
+					} else {
+						scriptStatus.innerHTML = '<div class="text-red-600">❌ window.adsbygoogle no existe</div>';
+						addDebugInfo('❌ window.adsbygoogle no está disponible');
+					}
+
+					// Verificar elementos de anuncios
+					const adElements = document.querySelectorAll('.adsbygoogle');
+					addDebugInfo(`📊 Encontrados ${adElements.length} elementos .adsbygoogle`);
+					
+					// Verificar script en DOM
+					const scripts = document.querySelectorAll('script[src*="adsbygoogle"]');
+					addDebugInfo(`📜 Scripts AdSense encontrados: ${scripts.length}`);
+					
+					// Verificar User Agent
+					addDebugInfo(`🌐 User Agent: ${navigator.userAgent.substring(0, 50)}...`);
+					
+					// Verificar si hay bloqueadores
+					if (window.navigator && window.navigator.plugins) {
+						addDebugInfo(`🔌 Plugins habilitados: ${window.navigator.plugins.length}`);
+					}
+					
+					// Verificar localhost
+					if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+						addDebugInfo('⚠️ Ejecutándose en localhost - Los anuncios pueden no mostrarse');
+					}
+					
+					diagnosticsRunning = false;
+				}, 1000);
+			}
+
+			// Ejecutar diagnósticos cuando la página cargue
+			document.addEventListener('DOMContentLoaded', function() {
+				addDebugInfo('🚀 Página cargada, iniciando diagnóstico...');
+				setTimeout(runDiagnostics, 2000);
+			});
+
+			// Ejecutar diagnósticos cuando el script AdSense esté listo
+			window.addEventListener('load', function() {
+				addDebugInfo('🏁 Window load event - ejecutando diagnóstico final...');
+				setTimeout(runDiagnostics, 3000);
+			});
+		</script>
+	</body>
+</html>
