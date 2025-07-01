@@ -1,0 +1,76 @@
+---
+export const prerender = false; // Marcar como dinámica para modo híbrido
+
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import BlogIndex from '../../components/BlogIndex.jsx';
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<BaseHead title="Blog de IA - AmerAI" description="Últimas noticias, tutoriales y análisis sobre Inteligencia Artificial" />
+		<!-- Google AdSense -->
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4946584433561362"
+			crossorigin="anonymous"></script>
+		<script is:inline>
+			window.adsbygoogle = window.adsbygoogle || [];
+		</script>
+	</head>
+	<body class="bg-gray-50">
+		<Header />
+		
+		<main>
+			<!-- Hero Section -->
+			<section class="bg-gradient-to-br from-gray-900 via-gray-800 to-green-900 text-white py-20">
+				<div class="container mx-auto px-6 text-center">
+					<h1 class="text-5xl md:text-6xl font-bold mb-6">
+						Blog de <span class="text-green-400">IA</span>
+					</h1>
+					<p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
+						Explora el fascinante mundo de la Inteligencia Artificial
+					</p>
+					<p class="text-lg text-gray-400 max-w-2xl mx-auto">
+						Noticias, tutoriales y análisis sobre las últimas tendencias en IA, Machine Learning y modelos generativos
+					</p>
+				</div>
+			</section>
+
+			<!-- AdSense Top Banner -->
+			<section class="container mx-auto px-6 py-8">
+				<div class="bg-white rounded-lg shadow-md p-4 mb-8">
+					<ins class="adsbygoogle"
+						style="display:block"
+						data-ad-client="ca-pub-4946584433561362"
+						data-ad-slot="2062230511"
+						data-ad-format="auto"
+						data-full-width-responsive="true"></ins>
+					<script is:inline>
+						(window.adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+				</div>
+			</section>
+
+			<!-- Blog Content -->
+			<BlogIndex client:load />
+
+			<!-- AdSense Bottom Banner -->
+			<section class="container mx-auto px-6 py-8">
+				<div class="bg-white rounded-lg shadow-md p-4">
+					<ins class="adsbygoogle"
+						style="display:block"
+						data-ad-client="ca-pub-4946584433561362"
+						data-ad-slot="2062230511"
+						data-ad-format="auto"
+						data-full-width-responsive="true"></ins>
+					<script is:inline>
+						(window.adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+				</div>
+			</section>
+		</main>
+		
+		<Footer />
+	</body>
+</html>

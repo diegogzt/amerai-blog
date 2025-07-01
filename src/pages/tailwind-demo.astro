@@ -1,0 +1,240 @@
+---
+import Layout from '../layouts/BlogPost.astro';
+---
+
+<Layout
+  title="Demo de Tailwind CSS"
+  description="Ejemplos de componentes y utilidades con Tailwind CSS"
+  pubDate={new Date('2025-06-30')}
+>
+  <main class="max-w-4xl mx-auto p-6">
+    <div class="prose-custom">
+      <h1 class="gradient-text text-5xl font-bold text-center mb-8">
+        🎨 Demo de Tailwind CSS
+      </h1>
+      
+      <p class="text-xl text-astro-gray-600 text-center mb-12">
+        Explora las capacidades de Tailwind CSS integrado con Astro
+      </p>
+
+      <!-- Cards Grid -->
+      <section class="mb-12">
+        <h2 class="text-3xl font-bold mb-6">Componentes con Cards</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="card hover:shadow-xl transition-shadow duration-300">
+            <h3 class="text-xl font-semibold mb-3 text-blue-600">🚀 Rápido</h3>
+            <p class="text-astro-gray-600">
+              Tailwind CSS permite crear interfaces rápidamente con clases utilitarias.
+            </p>
+          </div>
+          
+          <div class="card hover:shadow-xl transition-shadow duration-300">
+            <h3 class="text-xl font-semibold mb-3 text-green-600">♻️ Reutilizable</h3>
+            <p class="text-astro-gray-600">
+              Componentes fácilmente reutilizables con configuración personalizada.
+            </p>
+          </div>
+          
+          <div class="card hover:shadow-xl transition-shadow duration-300">
+            <h3 class="text-xl font-semibold mb-3 text-purple-600">📱 Responsivo</h3>
+            <p class="text-astro-gray-600">
+              Diseño móvil-primero con breakpoints intuitivos.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Buttons -->
+      <section class="mb-12">
+        <h2 class="text-3xl font-bold mb-6">Botones</h2>
+        <div class="flex flex-wrap gap-4">
+          <button class="btn-primary">
+            Botón Primario
+          </button>
+          <button class="btn-secondary">
+            Botón Secundario
+          </button>
+          <button class="btn bg-green-600 text-white hover:bg-green-700">
+            Éxito
+          </button>
+          <button class="btn bg-red-600 text-white hover:bg-red-700">
+            Peligro
+          </button>
+          <button class="btn bg-yellow-500 text-yellow-900 hover:bg-yellow-600">
+            Advertencia
+          </button>
+        </div>
+      </section>
+
+      <!-- Typography -->
+      <section class="mb-12">
+        <h2 class="text-3xl font-bold mb-6">Tipografía</h2>
+        <div class="space-y-4">
+          <h1 class="text-5xl font-bold text-astro-gray-900">Heading 1</h1>
+          <h2 class="text-4xl font-semibold text-astro-gray-800">Heading 2</h2>
+          <h3 class="text-3xl font-medium text-astro-gray-700">Heading 3</h3>
+          <p class="text-lg text-astro-gray-600">
+            Este es un párrafo de ejemplo con <strong>texto en negrita</strong> y 
+            <em>texto en cursiva</em>. También podemos tener 
+            <code class="bg-astro-gray-100 px-2 py-1 rounded">código inline</code>.
+          </p>
+          <blockquote class="border-l-4 border-blue-500 pl-4 italic text-astro-gray-600">
+            "El diseño no es solo cómo se ve y se siente. El diseño es cómo funciona." - Steve Jobs
+          </blockquote>
+        </div>
+      </section>
+
+      <!-- Forms -->
+      <section class="mb-12">
+        <h2 class="text-3xl font-bold mb-6">Formularios</h2>
+        <div class="card max-w-md">
+          <form class="space-y-4">
+            <div>
+              <label for="name" class="block text-sm font-medium text-astro-gray-700 mb-1">
+                Nombre
+              </label>
+              <input
+                type="text"
+                id="name"
+                class="w-full px-3 py-2 border border-astro-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Tu nombre"
+              />
+            </div>
+            
+            <div>
+              <label for="email" class="block text-sm font-medium text-astro-gray-700 mb-1">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                class="w-full px-3 py-2 border border-astro-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="tu@email.com"
+              />
+            </div>
+            
+            <div>
+              <label for="message" class="block text-sm font-medium text-astro-gray-700 mb-1">
+                Mensaje
+              </label>
+              <textarea
+                id="message"
+                rows={4}
+                class="w-full px-3 py-2 border border-astro-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Tu mensaje..."
+              ></textarea>
+            </div>
+            
+            <button type="submit" class="btn-primary w-full">
+              Enviar Mensaje
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Colors -->
+      <section class="mb-12">
+        <h2 class="text-3xl font-bold mb-6">Paleta de Colores</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          <div class="text-center">
+            <div class="w-full h-20 bg-blue-500 rounded-lg mb-2"></div>
+            <span class="text-sm text-astro-gray-600">Blue 500</span>
+          </div>
+          <div class="text-center">
+            <div class="w-full h-20 bg-green-500 rounded-lg mb-2"></div>
+            <span class="text-sm text-astro-gray-600">Green 500</span>
+          </div>
+          <div class="text-center">
+            <div class="w-full h-20 bg-purple-500 rounded-lg mb-2"></div>
+            <span class="text-sm text-astro-gray-600">Purple 500</span>
+          </div>
+          <div class="text-center">
+            <div class="w-full h-20 bg-red-500 rounded-lg mb-2"></div>
+            <span class="text-sm text-astro-gray-600">Red 500</span>
+          </div>
+          <div class="text-center">
+            <div class="w-full h-20 bg-yellow-500 rounded-lg mb-2"></div>
+            <span class="text-sm text-astro-gray-600">Yellow 500</span>
+          </div>
+          <div class="text-center">
+            <div class="w-full h-20 bg-astro-gray-500 rounded-lg mb-2"></div>
+            <span class="text-sm text-astro-gray-600">Gray 500</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Responsive Grid -->
+      <section class="mb-12">
+        <h2 class="text-3xl font-bold mb-6">Grid Responsivo</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-gradient-to-br from-blue-400 to-blue-600 p-6 rounded-lg text-white text-center">
+            <h3 class="font-bold">Col 1</h3>
+            <p class="text-sm opacity-90">Móvil: 1 col</p>
+          </div>
+          <div class="bg-gradient-to-br from-green-400 to-green-600 p-6 rounded-lg text-white text-center">
+            <h3 class="font-bold">Col 2</h3>
+            <p class="text-sm opacity-90">SM: 2 cols</p>
+          </div>
+          <div class="bg-gradient-to-br from-purple-400 to-purple-600 p-6 rounded-lg text-white text-center">
+            <h3 class="font-bold">Col 3</h3>
+            <p class="text-sm opacity-90">LG: 4 cols</p>
+          </div>
+          <div class="bg-gradient-to-br from-red-400 to-red-600 p-6 rounded-lg text-white text-center">
+            <h3 class="font-bold">Col 4</h3>
+            <p class="text-sm opacity-90">Responsivo</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Utilities -->
+      <section class="mb-12">
+        <h2 class="text-3xl font-bold mb-6">Utilidades Personalizadas</h2>
+        <div class="space-y-6">
+          <div class="glass p-6 rounded-lg">
+            <h3 class="text-xl font-semibold mb-2">Efecto Glass</h3>
+            <p>Panel con efecto de cristal usando backdrop-filter.</p>
+          </div>
+          
+          <div class="bg-astro-gray-900 p-6 rounded-lg">
+            <h3 class="text-shadow text-xl font-semibold mb-2 text-white">
+              Texto con Sombra
+            </h3>
+            <p class="text-astro-gray-300">
+              Texto con sombra personalizada para mejor legibilidad.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features -->
+      <section class="mb-12">
+        <h2 class="text-3xl font-bold mb-6">Características</h2>
+        <div class="bg-gradient-to-r from-blue-50 to-purple-50 p-8 rounded-xl">
+          <ul class="space-y-3">
+            <li class="flex items-center space-x-3">
+              <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+              <span>Integración completa con Astro</span>
+            </li>
+            <li class="flex items-center space-x-3">
+              <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+              <span>Configuración personalizada con tema extendido</span>
+            </li>
+            <li class="flex items-center space-x-3">
+              <span class="w-2 h-2 bg-purple-500 rounded-full"></span>
+              <span>Componentes reutilizables predefinidos</span>
+            </li>
+            <li class="flex items-center space-x-3">
+              <span class="w-2 h-2 bg-red-500 rounded-full"></span>
+              <span>Compatibilidad con variables CSS existentes</span>
+            </li>
+            <li class="flex items-center space-x-3">
+              <span class="w-2 h-2 bg-yellow-500 rounded-full"></span>
+              <span>Optimización automática para producción</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</Layout>

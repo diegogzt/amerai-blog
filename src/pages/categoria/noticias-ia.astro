@@ -1,0 +1,57 @@
+---
+import Layout from '../../layouts/BlogPost.astro';
+---
+
+<Layout
+  title="Noticias de IA"
+  description="Últimos avances, lanzamientos y tendencias en inteligencia artificial"
+  pubDate={new Date('2025-07-01')}
+>
+  <main class="container mx-auto px-6 py-12">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Noticias de IA</h1>
+      <p class="text-xl text-gray-600 mb-8">
+        Últimos avances, lanzamientos y tendencias en inteligencia artificial
+      </p>
+      
+      <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
+        <h2 class="text-lg font-semibold text-blue-900 mb-2">🚧 Sección en Construcción</h2>
+        <p class="text-blue-800">
+          Esta sección está siendo desarrollada. Pronto encontrarás aquí las últimas noticias 
+          sobre inteligencia artificial, incluyendo:
+        </p>
+        <ul class="list-disc list-inside mt-4 text-blue-800 space-y-1">
+          <li>Lanzamientos de nuevos modelos de IA</li>
+          <li>Actualizaciones de OpenAI, Google, Meta y otros</li>
+          <li>Tendencias emergentes en el campo de la IA</li>
+          <li>Análisis de impacto en diferentes industrias</li>
+          <li>Regulaciones y políticas sobre IA</li>
+        </ul>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="card">
+          <h3 class="text-xl font-semibold mb-3">📰 Próximas Funcionalidades</h3>
+          <ul class="space-y-2 text-gray-600">
+            <li>• Feed de noticias en tiempo real</li>
+            <li>• Filtros por empresa (OpenAI, Google, etc.)</li>
+            <li>• Categorización automática</li>
+            <li>• Newsletter semanal</li>
+          </ul>
+        </div>
+        
+        <div class="card">
+          <h3 class="text-xl font-semibold mb-3">🔔 Mantente Informado</h3>
+          <p class="text-gray-600 mb-4">
+            Mientras desarrollamos esta sección, puedes seguirnos en nuestras redes sociales 
+            para no perderte las últimas noticias de IA.
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" class="btn btn-primary">Instagram</a>
+            <a href="#" class="btn btn-secondary">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>

@@ -1,0 +1,159 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+export const prerender = false; // Marcar como dinámica para modo híbrido
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+
+export async function getStaticPaths() {
+	// Como estamos usando modo híbrido, retornamos un array vacío
+	// Las rutas se generarán dinámicamente
+	return [];
+}
+
+// Obtener el artículo desde la API
+const { slug } = Astro.params;
+
+let post = null;
+let error = null;
+
+try {
+	const baseUrl = Astro.url.origin;
+	const response = await fetch(`${baseUrl}/api/articles/${slug}`);
+	
+	if (response.ok) {
+		post = await response.json();
+	} else {
+		error = 'Artículo no encontrado';
+	}
+} catch (e) {
+	error = 'Error cargando el artículo';
+	console.error('Error:', e);
+}
+
+// Si hay error, mostrar página 404
+if (error || !post) {
+	return Astro.redirect('/404');
+}
+
+// Función para convertir contenido a HTML (básica)
+function processContent(content) {
+	// Si el contenido ya es HTML, lo devolvemos tal como está
+	// Si es texto plano, añadimos algunos saltos de línea
+	return content.replace(/\n/g, '<br>');
+}
+
+const htmlContent = processContent(post.content);
+
+// Función para obtener el color de la categoría
+function getCategoryColor(category) {
+	const colors = {
+		'noticias-ia': 'bg-blue-100 text-blue-800',
+		'tutoriales-ia': 'bg-green-100 text-green-800', 
+		'modelos-generativos': 'bg-purple-100 text-purple-800'
+	};
+	return colors[category] || 'bg-gray-100 text-gray-800';
+}
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<BaseHead title={post.title} description={post.excerpt} />
+		<!-- Google AdSense -->
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4946584433561362"
+			crossorigin="anonymous"></script>
+		<script is:inline>
+			window.adsbygoogle = window.adsbygoogle || [];
+		</script>
+	</head>
+	<body class="bg-gray-50">
+		<Header />
+		
+		<main class="container mx-auto px-6 py-8">
+			<!-- Hero del Artículo -->
+			<article class="max-w-4xl mx-auto">
+				<!-- Metadatos del Artículo -->
+				<header class="mb-8">
+					<div class="mb-4">
+						<span class={`inline-block text-sm px-3 py-1 rounded-full ${getCategoryColor(post.category)}`}>
+							{post.category.replace('-', ' ').toUpperCase()}
+						</span>
+					</div>
+					<h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+						{post.title}
+					</h1>
+					<p class="text-xl text-gray-600 mb-4">
+						{post.excerpt}
+					</p>
+					<div class="flex items-center text-gray-500 text-sm">
+						<time datetime={post.publishedAt}>
+							<FormattedDate date={new Date(post.publishedAt)} />
+						</time>
+						{post.tags && post.tags.length > 0 && (
+							<>
+								<span class="mx-2">•</span>
+								<div class="flex gap-2">
+									{post.tags.map(tag => (
+<span class="bg-gray-200 px-2 py-1 rounded text-xs">
+											#{tag}
+										</span>
+									))}
+								</div>
+							</>
+						)}
+					</div>
+				</header>
+
+				<!-- Anuncio Superior -->
+				<div class="mb-8">
+					<div class="bg-white rounded-lg shadow-md p-4">
+						<ins class="adsbygoogle"
+							style="display:block"
+							data-ad-client="ca-pub-4946584433561362"
+							data-ad-slot="2062230511"
+							data-ad-format="auto"
+							data-full-width-responsive="true"></ins>
+						<script is:inline>
+							(window.adsbygoogle = window.adsbygoogle || []).push({});
+						</script>
+					</div>
+				</div>
+				
+				<!-- Contenido del Artículo -->
+				<div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+					<div class="prose prose-lg max-w-none">
+						<div class="text-gray-800 leading-relaxed" set:html={htmlContent}></div>
+					</div>
+				</div>
+
+				<!-- Anuncio Inferior -->
+				<div class="mt-12">
+					<div class="bg-white rounded-lg shadow-md p-4">
+						<ins class="adsbygoogle"
+							style="display:block"
+							data-ad-client="ca-pub-4946584433561362"
+							data-ad-slot="2062230511"
+							data-ad-format="auto"
+							data-full-width-responsive="true"></ins>
+						<script is:inline>
+							(window.adsbygoogle = window.adsbygoogle || []).push({});
+						</script>
+					</div>
+				</div>
+
+				<!-- Navegación -->
+				<div class="mt-12 pt-8 border-t">
+					<a 
+						href="/blog" 
+						class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors"
+					>
+						← Volver al Blog
+					</a>
+				</div>
+			</article>
+		</main>
+		
+		<Footer />
+	</body>
+</html>

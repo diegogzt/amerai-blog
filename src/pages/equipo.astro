@@ -1,0 +1,44 @@
+---
+import Layout from '../layouts/BlogPost.astro';
+---
+
+<Layout
+  title="Equipo"
+  description="Conoce a nuestro equipo"
+  pubDate={new Date('2025-07-01')}
+>
+  <main class="container mx-auto px-6 py-12">
+    <h1 class="text-4xl font-bold text-center mb-8">Nuestro Equipo</h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+        <div class="w-24 h-24 bg-gradient-to-r from-green-400 to-blue-500 rounded-full mx-auto mb-4"></div>
+        <h3 class="text-xl font-semibold mb-2">Juan Pérez</h3>
+        <p class="text-gray-600 mb-2">CEO & Growth Marketing Specialist</p>
+        <p class="text-sm text-gray-500">10+ años de experiencia en marketing digital y growth hacking.</p>
+      </div>
+      
+      <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+        <div class="w-24 h-24 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full mx-auto mb-4"></div>
+        <h3 class="text-xl font-semibold mb-2">María García</h3>
+        <p class="text-gray-600 mb-2">Content Marketing Manager</p>
+        <p class="text-sm text-gray-500">Especialista en contenido que convierte y estrategias de SEO.</p>
+      </div>
+      
+      <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+        <div class="w-24 h-24 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full mx-auto mb-4"></div>
+        <h3 class="text-xl font-semibold mb-2">Carlos López</h3>
+        <p class="text-gray-600 mb-2">Data Analyst</p>
+        <p class="text-sm text-gray-500">Experto en análisis de datos y optimización de conversiones.</p>
+      </div>
+    </div>
+    
+    <div class="text-center mt-12">
+      <h2 class="text-2xl font-bold mb-6">¿Quieres unirte a nuestro equipo?</h2>
+      <p class="text-gray-600 mb-8">Estamos siempre buscando talento excepcional para ayudar a las empresas a crecer.</p>
+      <a href="/contact" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
+        Contáctanos
+      </a>
+    </div>
+  </main>
+</Layout>

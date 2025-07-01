@@ -1,0 +1,69 @@
+---
+import Layout from '../../layouts/BlogPost.astro';
+---
+
+<Layout
+  title="Tutoriales de IA"
+  description="Guías paso a paso sobre modelos, frameworks y herramientas de IA"
+  pubDate={new Date('2025-07-01')}
+>
+  <main class="container mx-auto px-6 py-12">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Tutoriales de IA</h1>
+      <p class="text-xl text-gray-600 mb-8">
+        Guías paso a paso sobre modelos, frameworks y herramientas de IA
+      </p>
+      
+      <div class="bg-green-50 border border-green-200 rounded-lg p-6 mb-8">
+        <h2 class="text-lg font-semibold text-green-900 mb-2">📚 Tutoriales en Desarrollo</h2>
+        <p class="text-green-800">
+          Estamos preparando tutoriales completos y fáciles de seguir sobre las herramientas 
+          más populares de IA. Próximamente incluiremos:
+        </p>
+        <ul class="list-disc list-inside mt-4 text-green-800 space-y-1">
+          <li>Introducción a Python para IA</li>
+          <li>Uso de APIs de OpenAI, Claude y Gemini</li>
+          <li>Fine-tuning de modelos de lenguaje</li>
+          <li>Construcción de chatbots personalizados</li>
+          <li>Integración de IA en aplicaciones web</li>
+          <li>Técnicas de prompt engineering</li>
+        </ul>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 mb-8">
+        <div class="card">
+          <div class="text-4xl mb-4">🤖</div>
+          <h3 class="text-lg font-semibold mb-2">Principiantes</h3>
+          <p class="text-gray-600">
+            Tutoriales básicos para empezar en el mundo de la IA sin conocimientos previos.
+          </p>
+        </div>
+        
+        <div class="card">
+          <div class="text-4xl mb-4">⚙️</div>
+          <h3 class="text-lg font-semibold mb-2">Intermedio</h3>
+          <p class="text-gray-600">
+            Guías técnicas para desarrolladores que quieren implementar IA en sus proyectos.
+          </p>
+        </div>
+        
+        <div class="card">
+          <div class="text-4xl mb-4">🚀</div>
+          <h3 class="text-lg font-semibold mb-2">Avanzado</h3>
+          <p class="text-gray-600">
+            Tutoriales especializados en técnicas avanzadas y optimización de modelos.
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-gray-100 rounded-lg p-6">
+        <h3 class="text-xl font-semibold mb-4">💡 ¿Qué tutorial te gustaría ver?</h3>
+        <p class="text-gray-600 mb-4">
+          Estamos construyendo nuestro contenido basado en lo que realmente necesitas aprender. 
+          ¡Contáctanos y dinos qué tutorial te ayudaría más!
+        </p>
+        <a href="/contact" class="btn btn-primary">Sugerir Tutorial</a>
+      </div>
+    </div>
+  </main>
+</Layout>

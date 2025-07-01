@@ -1,0 +1,38 @@
+{
+  "name": "amerai-blog",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Blog de Inteligencia Artificial - AmerAI",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build", 
+    "preview": "astro preview",
+    "start": "node dist/server/entry.mjs",
+    "astro": "astro",
+    "check": "astro check",
+    "clean": "rm -rf dist node_modules/.astro"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^4.3.0",
+    "@astrojs/node": "^9.2.2",
+    "@astrojs/react": "^4.3.0",
+    "@astrojs/rss": "^4.0.12",
+    "@astrojs/sitemap": "^3.4.1",
+    "@astrojs/tailwind": "^6.0.2",
+    "@astrojs/vercel": "^8.2.0",
+    "@tailwindcss/typography": "^0.5.16",
+    "astro": "^5.10.1",
+    "mongodb": "^6.17.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "sharp": "^0.34.2",
+    "tailwindcss": "^3.4.17"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

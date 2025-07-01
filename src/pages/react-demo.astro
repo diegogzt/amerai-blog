@@ -1,0 +1,64 @@
+---
+import Layout from '../layouts/BlogPost.astro';
+import ReactCounter from '../components/ReactCounter.jsx';
+import TodoList from '../components/TodoList';
+import Welcome from '../components/Welcome';
+---
+
+<Layout
+  title="Demo de Componentes React"
+  description="Ejemplo de integración de React con Astro"
+  pubDate={new Date('2025-06-30')}
+>
+  <main>
+    <h1>Demo de Componentes React en Astro</h1>
+    
+    <p>Esta página demuestra cómo usar componentes React en Astro con diferentes estrategias de hidratación.</p>
+
+    <h2>0. Componente de Bienvenida</h2>
+    <p>Un componente personalizable con diferentes props:</p>
+    <Welcome client:load name="Desarrollador" theme="light" />
+    <Welcome client:visible name="Usuario Avanzado" theme="dark" />
+
+    <h2>1. Componente React con client:load</h2>
+    <p>Este contador se hidrata inmediatamente cuando la página carga:</p>
+    <ReactCounter client:load initialValue={5} />
+
+    <h2>2. Componente React con client:visible</h2>
+    <p>Este contador se hidrata solo cuando entra en el viewport:</p>
+    <ReactCounter client:visible initialValue={10} />
+
+    <h2>3. Componente React con client:idle</h2>
+    <p>Esta lista de tareas se hidrata cuando el navegador está inactivo:</p>
+    <TodoList client:idle title="Mis Tareas Pendientes" />
+
+    <h2>4. Componente React estático (sin hidratación)</h2>
+    <p>Este contador se renderiza en el servidor pero no es interactivo:</p>
+    <ReactCounter initialValue={0} />
+    <p><em>Nota: Los botones arriba no funcionan porque no hay hidratación del lado cliente.</em></p>
+
+    <h2>5. Componente React con client:media</h2>
+    <p>Este contador se hidrata solo en pantallas pequeñas (máximo 768px):</p>
+    <ReactCounter client:media="(max-width: 768px)" initialValue={20} />
+
+    <h2>Directivas de Cliente Disponibles</h2>
+    <ul>
+      <li><code>client:load</code> - Hidrata inmediatamente al cargar la página</li>
+      <li><code>client:idle</code> - Hidrata cuando el navegador está inactivo</li>
+      <li><code>client:visible</code> - Hidrata cuando el componente entra en el viewport</li>
+      <li><code>client:media</code> - Hidrata cuando se cumple una media query</li>
+      <li><code>client:only</code> - Renderiza solo en el cliente</li>
+      <li>Sin directiva - Solo renderizado en el servidor (estático)</li>
+    </ul>
+
+    <div style="background: #f3f4f6; padding: 20px; border-radius: 8px; margin: 20px 0;">
+      <h3>💡 Consejos de Rendimiento</h3>
+      <ul>
+        <li>Usa <code>client:load</code> solo para componentes críticos</li>
+        <li><code>client:visible</code> es ideal para componentes que aparecen después del scroll</li>
+        <li><code>client:idle</code> es perfecto para componentes de menor prioridad</li>
+        <li>Considera no usar ninguna directiva para componentes puramente informativos</li>
+      </ul>
+    </div>
+  </main>
+</Layout>
